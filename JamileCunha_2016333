@@ -1,0 +1,95 @@
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Server version:               10.1.26-MariaDB - mariadb.org binary distribution
+-- Server OS:                    Win32
+-- HeidiSQL Version:             9.4.0.5125
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+-- Dumping database structure for ca web
+CREATE DATABASE IF NOT EXISTS `ca web` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `ca web`;
+
+-- Dumping structure for table ca web.books
+CREATE TABLE IF NOT EXISTS `books` (
+  `books_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_book` varchar(50) NOT NULL,
+  `author` varchar(50) NOT NULL,
+  `ibsn` varchar(10) NOT NULL,
+  PRIMARY KEY (`books_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table ca web.books: ~5 rows (approximately)
+/*!40000 ALTER TABLE `books` DISABLE KEYS */;
+INSERT INTO `books` (`books_id`, `name_book`, `author`, `ibsn`) VALUES
+	(1, ' Generation X', ' Douglas Coupland', '0349108390'),
+	(2, 'Introducing HTML5', 'Remy Sharp', '0321687299'),
+	(3, 'Handcrafted CSS', 'Dan Cederholm', '0321643380'),
+	(4, 'Bulletproof Web Design', 'Dan Cederholm', '0321509021'),
+	(5, 'The Tipping Point', 'Malcolm Gladwell', '0349113467');
+/*!40000 ALTER TABLE `books` ENABLE KEYS */;
+
+-- Dumping structure for table ca web.profile
+CREATE TABLE IF NOT EXISTS `profile` (
+  `username` varchar(50) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `address` varchar(50) NOT NULL,
+  `phone` int(11) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `gender` varchar(50) NOT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table ca web.profile: ~3 rows (approximately)
+/*!40000 ALTER TABLE `profile` DISABLE KEYS */;
+INSERT INTO `profile` (`username`, `user_id`, `address`, `phone`, `email`, `gender`) VALUES
+	('Jamile', 1234567, 'Parnell St, Dublin', 7659669, 'jamile@cct.com', 'female'),
+	('noel', 1234568, 'New York, Second St.', 12365892, 'noel@cct.ie', 'male'),
+	('Sean', 1478523, 'GraceParkMinor, D9', 1452635, 'sean@cct.ie', 'male');
+/*!40000 ALTER TABLE `profile` ENABLE KEYS */;
+
+-- Dumping structure for table ca web.transaction
+CREATE TABLE IF NOT EXISTS `transaction` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `books_id` varchar(50) NOT NULL,
+  `user_id` varchar(50) NOT NULL,
+  `check_in` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `check_out` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table ca web.transaction: ~3 rows (approximately)
+/*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
+INSERT INTO `transaction` (`id`, `books_id`, `user_id`, `check_in`, `check_out`) VALUES
+	(7, '1', '1478523', '2017-12-25 20:10:23', '2017-12-18 20:10:23'),
+	(8, '4', '1234567', '2017-12-25 20:13:43', '2017-12-18 20:13:43'),
+	(9, '2', '1234568', '2017-12-25 20:15:49', '2017-12-18 20:15:49');
+/*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
+
+-- Dumping structure for table ca web.users
+CREATE TABLE IF NOT EXISTS `users` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `accountType` varchar(50) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7654322 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table ca web.users: ~4 rows (approximately)
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`user_id`, `username`, `password`, `accountType`) VALUES
+	(0, 'Admin', 'Admin', 'Admin'),
+	(1234567, 'jamile', '$2y$10$9fyjJJ3jWh28NwbbWZvjXOGQQePXkaJ8SgbJHrkfcxh', 'Student'),
+	(1234568, 'noel', '$2y$10$MRVmP1zQae77tipmzH6sqOYKN0IFWv91z/P2ORnF1bu', 'Student'),
+	(1478523, 'sean', '$2y$10$sebphKau2RmSgXRLQ0ov6uPLFsaVaXCbxXDWD/ubZQN', 'Student');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

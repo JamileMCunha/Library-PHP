@@ -1,0 +1,12 @@
+table {
+border-collapse:collapse;
+    border-radius: 10px;
+}
+th, td {
+	border: 3px dashed black;
+padding: 10px;
+vertical-align: bottom;
+}
+th{
+background-color: hsl(0, 100%, 25%);
+color: white}
